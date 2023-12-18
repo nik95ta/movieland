@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Routes, Route, createSearchParams, useSearchParams, useNavigate } from 'react-router-dom';
+import { createSearchParams, Route, Routes, useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import 'reactjs-popup/dist/index.css';
 import { fetchMovies } from './data/moviesSlice';
-import { ENDPOINT_SEARCH, ENDPOINT_DISCOVER, ENDPOINT, API_KEY } from './constants';
+import { discoverEndpoint, movieEndpoint, searchEndpoint } from './constants';
 import Header from './components/Header';
 import Movies from './components/Movies';
 import Starred from './components/Starred';
@@ -27,10 +27,10 @@ const App = () => {
 
   const getSearchResults = (query) => {
     if (query !== '') {
-      dispatch(fetchMovies(`${ENDPOINT_SEARCH}&query=` + query));
+      dispatch(fetchMovies(searchEndpoint(query)));
       setSearchParams(createSearchParams({ search: query }));
     } else {
-      dispatch(fetchMovies(ENDPOINT_DISCOVER));
+      dispatch(fetchMovies(discoverEndpoint()));
       setSearchParams();
     }
   };
@@ -42,9 +42,9 @@ const App = () => {
 
   const getMovies = () => {
     if (searchQuery) {
-      dispatch(fetchMovies(`${ENDPOINT_SEARCH}&query=` + searchQuery));
+      dispatch(fetchMovies(searchEndpoint(searchQuery)));
     } else {
-      dispatch(fetchMovies(ENDPOINT_DISCOVER));
+      dispatch(fetchMovies(discoverEndpoint()));
     }
   };
 
@@ -55,7 +55,7 @@ const App = () => {
   };
 
   const getMovie = async (id) => {
-    const URL = `${ENDPOINT}/movie/${id}?api_key=${API_KEY}&append_to_response=videos`;
+    const URL = movieEndpoint(id);
 
     setVideoKey(null);
     const videoData = await fetch(URL).then((response) => response.json());
