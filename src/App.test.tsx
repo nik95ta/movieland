@@ -2,6 +2,42 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from './utils/testUtils';
 import App from './App';
+import React from 'react';
+
+const mockMoviesData = {
+  results: [{ id: '123', title: 'Through the Eyes of Forrest Gump' }],
+  page: 1,
+  total_pages: 1,
+};
+
+const mockTrailerData = {
+  videos: {
+    results: [
+      {
+        type: 'Trailer',
+        key: 'mocked_video_key',
+      },
+    ],
+  },
+};
+
+beforeEach(() => {
+  global.fetch = jest.fn((url) => {
+    if (url.includes('append_to_response=videos')) {
+      return Promise.resolve({
+        json: () => Promise.resolve(mockTrailerData),
+      });
+    } else {
+      return Promise.resolve({
+        json: () => Promise.resolve(mockMoviesData),
+      });
+    }
+  }) as jest.Mock;
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
 
 it('renders watch later link', () => {
   renderWithProviders(<App />);
@@ -10,7 +46,12 @@ it('renders watch later link', () => {
 });
 
 it('search for movies', async () => {
-  renderWithProviders(<App />);
+  renderWithProviders(
+    <>
+      <App />
+      <div id="modal-root" />
+    </>,
+  );
   await userEvent.type(screen.getByTestId('search-movies'), 'forrest gump');
   await waitFor(() => {
     expect(screen.getAllByText('Through the Eyes of Forrest Gump')[0]).toBeInTheDocument();

@@ -43,10 +43,14 @@ const Movie: React.FC<MovieProps> = ({ movie }) => {
               className="btn-star"
               data-testid={isStarred ? 'unstar-link' : 'starred-link'}
               onClick={toggleStar}>
-              <i className={clsx('bi', { 'bi-star-fill': isStarred, 'bi-star': !isStarred })} />
+              <i
+                data-testid={isStarred && 'star-fill'}
+                className={clsx('bi', { 'bi-star-fill': isStarred, 'bi-star': !isStarred })}
+              />
             </span>
             <button
               type="button"
+              data-testid={isInWatchLater ? 'remove-watch-later' : 'watch-later'}
               className={clsx('btn btn-light btn-watch-later', { blue: isInWatchLater })}
               onClick={toggleWatchLater}>
               {isInWatchLater ? <i className="bi bi-check"></i> : 'Watch Later'}

@@ -3,6 +3,24 @@ import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from '../../../utils/testUtils';
 import App from '../../../App';
 
+const mockMoviesData = {
+  results: [{ id: '123', title: 'Through the Eyes of Forrest Gump' }],
+  page: 1,
+  total_pages: 1,
+};
+
+beforeEach(() => {
+  global.fetch = jest.fn(() =>
+    Promise.resolve({
+      json: () => Promise.resolve(mockMoviesData),
+    }),
+  ) as jest.Mock;
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
 it('movies starred and saved to watch later', async () => {
   renderWithProviders(<App />);
 

@@ -3,6 +3,31 @@ import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from '../../../utils/testUtils';
 import App from '../../../App';
 
+const mockMoviesData = {
+  results: [{ id: '123', title: 'Through the Eyes of Forrest Gump' }],
+  page: 1,
+  total_pages: 1,
+};
+
+beforeEach(() => {
+  global.fetch = jest.fn(() =>
+    Promise.resolve({
+      json: () => Promise.resolve(mockMoviesData),
+    }),
+  ) as jest.Mock;
+  const modalRoot = document.createElement('div');
+  modalRoot.setAttribute('id', 'modal-root');
+  document.body.appendChild(modalRoot);
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
+  const modalRoot = document.getElementById('modal-root');
+  if (modalRoot) {
+    document.body.removeChild(modalRoot);
+  }
+});
+
 it('Watch Later movies page', async () => {
   renderWithProviders(<App />);
 
@@ -15,10 +40,4 @@ it('Watch Later movies page', async () => {
     expect(watchLaterLink).toBeInTheDocument();
   });
   await userEvent.click(watchLaterLink);
-
-  // const watchLaterink = screen.getByTestId('watch-later-div')
-  // await waitFor(() => {
-  //     expect(watchLaterink).toBeInTheDocument()
-  // })
-  // await userEvent.click(watchLaterink)
 });
