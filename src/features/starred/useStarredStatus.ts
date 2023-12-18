@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import starredSlice from '../data/starredSlice';
-import { MovieInterface } from '../interfaces';
-import { RootState } from '../data/store';
+import starredSlice from './starredSlice';
+import { MovieInterface } from '../../interfaces';
+import { RootState } from '../../store';
 
 const useStarredStatus = (movie: MovieInterface) => {
   const { starredMovies } = useSelector((state: RootState) => state.starred);

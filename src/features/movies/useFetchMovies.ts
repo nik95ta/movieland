@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchMovies, searchMovies } from '../data/moviesSlice';
-import { AppDispatch, RootState } from '../data/store';
+import { fetchMovies, searchMovies } from './moviesSlice';
+import { AppDispatch, RootState } from '../../store';
 
 const useFetchMovies = (query: string | null) => {
   const { movies } = useSelector((state: RootState) => state.movies);

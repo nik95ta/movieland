@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../data/store';
-import watchLaterSlice from '../data/watchLaterSlice';
-import { MovieInterface } from '../interfaces';
+import { RootState } from '../../store';
+import watchLaterSlice from './watchLaterSlice';
+import { MovieInterface } from '../../interfaces';
 
 const useWatchLaterStatus = (movie: MovieInterface) => {
   const { watchLaterMovies } = useSelector((state: RootState) => state.watchLater);

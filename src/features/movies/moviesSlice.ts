@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { discoverEndpoint, searchEndpoint } from '../constants';
-import { MovieInterface } from '../interfaces';
+import { discoverEndpoint, searchEndpoint } from '../../constants';
+import { MovieInterface } from '../../interfaces';
 
 export const fetchMovies = createAsyncThunk('fetch-movies', async ({}: { query?: string } = {}) => {
   const response = await fetch(discoverEndpoint());

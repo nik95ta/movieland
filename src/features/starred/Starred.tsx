@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import starredSlice from '../data/starredSlice';
-import Movie from './Movie';
-import { RootState } from '../data/store';
-import { MovieInterface } from '../interfaces';
-import '../styles/starred.scss';
+import starredSlice from './starredSlice';
+import { Movie } from '../../components';
+import { RootState } from '../../store';
+import { MovieInterface } from '../../interfaces';
+import './starred.scss';
 
 interface StarredProps {
   viewTrailer: (id: string) => void;

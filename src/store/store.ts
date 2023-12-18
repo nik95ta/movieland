@@ -1,7 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import moviesSlice from './moviesSlice';
-import starredSlice from './starredSlice';
-import watchLaterSlice from './watchLaterSlice';
+import { moviesSlice, starredSlice, watchLaterSlice } from '../features';
 
 const store = configureStore({
   reducer: {

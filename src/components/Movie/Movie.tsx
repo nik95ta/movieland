@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import clsx from 'clsx';
-import placeholder from '../assets/not-found-500X750.jpeg';
-import { useStarredStatus, useWatchLaterStatus } from '../hooks';
-import { MovieInterface } from '../interfaces';
+import placeholder from '../../assets/not-found-500X750.jpeg';
+import { useStarredStatus, useWatchLaterStatus } from '../../features';
+import { MovieInterface } from '../../interfaces';
 
 interface MovieProps {
   viewTrailer: (id: string) => void;

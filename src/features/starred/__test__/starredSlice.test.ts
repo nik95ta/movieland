@@ -1,5 +1,5 @@
-import starredSlice from '../data/starredSlice';
-import { moviesMock } from './movies.mocks';
+import starredSlice from '../starredSlice';
+import { moviesMock } from '../../../utils/movies.mocks';
 
 describe('starredSlice test', () => {
   const state = { starredMovies: [] };

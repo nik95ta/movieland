@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { MovieInterface } from '../interfaces';
+import { MovieInterface } from '../../interfaces';
 
 interface WatchLaterState {
   watchLaterMovies: MovieInterface[];

@@ -1,8 +1,9 @@
 import { useSearchParams } from 'react-router-dom';
-import { useDebounce, useFetchMovies } from '../hooks';
-import Movie from './Movie';
-import '../styles/movies.scss';
-import { MovieInterface } from '../interfaces';
+import { useDebounce } from '../../hooks';
+import useFetchMovies from './useFetchMovies';
+import { Movie } from '../../components';
+import './movies.scss';
+import { MovieInterface } from '../../interfaces';
 
 interface MoviesProps {
   viewTrailer: (id: string) => void;

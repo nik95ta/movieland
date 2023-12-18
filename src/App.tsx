@@ -1,10 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import 'reactjs-popup/dist/index.css';
-import Header from './components/Header';
-import Movies from './components/Movies';
-import Starred from './components/Starred';
-import WatchLater from './components/WatchLater';
-import YoutubePlayer from './components/YoutubePlayer';
+import { Header, YoutubePlayer } from './components';
+import { Movies, Starred, WatchLater } from './features';
 import { useFetchTrailer } from './hooks';
 import './app.scss';
 

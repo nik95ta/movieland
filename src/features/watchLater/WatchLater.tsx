@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import watchLaterSlice from '../data/watchLaterSlice';
-import Movie from './Movie';
-import { RootState } from '../data/store';
-import { MovieInterface } from '../interfaces';
-import '../styles/starred.scss';
+import watchLaterSlice from './watchLaterSlice';
+import { Movie } from '../../components';
+import { RootState } from '../../store';
+import { MovieInterface } from '../../interfaces';
+import '../starred/starred.scss';
 
 interface WatchLaterProps {
   viewTrailer: (id: string) => void;

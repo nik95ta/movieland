@@ -1,7 +1,7 @@
-import watchLaterSlice from '../data/watchLaterSlice';
-import { moviesMock } from './movies.mocks';
+import watchLaterSlice from '../watchLaterSlice';
+import { moviesMock } from '../../../utils/movies.mocks';
 
-describe('watchLaterSlice test', () => {
+describe('watchLaterSlice utils', () => {
   const state = { watchLaterMovies: [] };
 
   it('should set initial state', () => {

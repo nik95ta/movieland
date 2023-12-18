@@ -4,10 +4,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { configureStore, EnhancedStore, PreloadedState } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
-import moviesSlice from '../data/moviesSlice';
-import starredSlice from '../data/starredSlice';
-import watchLaterSlice from '../data/watchLaterSlice';
-import { RootState } from '../data/store';
+import { moviesSlice, starredSlice, watchLaterSlice } from '../features';
+import { RootState } from '../store';
 
 interface RenderWithProvidersOptions extends RenderOptions {
   preloadedState?: PreloadedState<RootState>;

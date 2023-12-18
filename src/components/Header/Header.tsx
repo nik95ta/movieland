@@ -1,8 +1,8 @@
 import { Link, NavLink, useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState } from '../data/store';
+import { RootState } from '../../store';
 
-import '../styles/header.scss';
+import './header.scss';
 
 const Header: React.FC = () => {
   const { starredMovies } = useSelector((state: RootState) => state.starred);
