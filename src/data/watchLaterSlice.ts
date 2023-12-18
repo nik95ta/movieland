@@ -1,17 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { MovieInterface } from '../interfaces';
+
+interface WatchLaterState {
+  watchLaterMovies: MovieInterface[];
+}
+
+const initialState: WatchLaterState = {
+  watchLaterMovies: [],
+};
 
 const watchLaterSlice = createSlice({
   name: 'watch-later',
-  initialState: {
-    watchLaterMovies: [],
-  },
+  initialState,
   reducers: {
     addToWatchLater: (state, action) => {
       state.watchLaterMovies = [action.payload, ...state.watchLaterMovies];
     },
     removeFromWatchLater: (state, action) => {
       state.watchLaterMovies = state.watchLaterMovies.filter(
-        (movie) => movie.id !== action.payload.id,
+        (movie: MovieInterface) => movie.id !== action.payload.id,
       );
     },
     removeAllWatchLater: (state) => {

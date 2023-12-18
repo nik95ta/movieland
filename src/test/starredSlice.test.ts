@@ -27,7 +27,7 @@ describe('starredSlice test', () => {
 
   it('should remove all movies', () => {
     const initialState = { ...state, starredMovies: moviesMock };
-    const action = starredSlice.actions.clearAllStarred(state);
+    const action = starredSlice.actions.clearAllStarred();
     const result = starredSlice.reducer(initialState, action);
     expect(Object.keys(result.starredMovies).length).toEqual(0);
   });

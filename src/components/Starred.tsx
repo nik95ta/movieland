@@ -2,10 +2,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import starredSlice from '../data/starredSlice';
 import Movie from './Movie';
+import { RootState } from '../data/store';
+import { MovieInterface } from '../interfaces';
 import '../styles/starred.scss';
 
-const Starred = ({ viewTrailer }) => {
-  const { starredMovies } = useSelector((state) => state.starred);
+interface StarredProps {
+  viewTrailer: (id: string) => void;
+}
+
+const Starred: React.FC<StarredProps> = ({ viewTrailer }) => {
+  const { starredMovies } = useSelector((state: RootState) => state.starred);
   const { clearAllStarred } = starredSlice.actions;
   const dispatch = useDispatch();
 
@@ -15,7 +21,7 @@ const Starred = ({ viewTrailer }) => {
         <div data-testid="starred-movies" className="starred-movies">
           <h6 className="header">Starred movies</h6>
           <div className="row">
-            {starredMovies.map((movie) => (
+            {starredMovies.map((movie: MovieInterface) => (
               <Movie movie={movie} key={movie.id} viewTrailer={viewTrailer} />
             ))}
           </div>

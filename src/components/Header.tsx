@@ -1,14 +1,15 @@
 import { Link, NavLink, useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { RootState } from '../data/store';
 
 import '../styles/header.scss';
 
-const Header = () => {
-  const { starredMovies } = useSelector((state) => state.starred);
+const Header: React.FC = () => {
+  const { starredMovies } = useSelector((state: RootState) => state.starred);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchValue = searchParams.get('search');
 
-  const handleSearch = (search) => {
+  const handleSearch = (search: string) => {
     if (search) {
       setSearchParams({ search });
       return;

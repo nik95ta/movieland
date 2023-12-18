@@ -2,10 +2,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import watchLaterSlice from '../data/watchLaterSlice';
 import Movie from './Movie';
+import { RootState } from '../data/store';
+import { MovieInterface } from '../interfaces';
 import '../styles/starred.scss';
 
-const WatchLater = ({ viewTrailer }) => {
-  const { watchLaterMovies } = useSelector((state) => state.watchLater);
+interface WatchLaterProps {
+  viewTrailer: (id: string) => void;
+}
+
+const WatchLater: React.FC<WatchLaterProps> = ({ viewTrailer }) => {
+  const { watchLaterMovies } = useSelector((state: RootState) => state.watchLater);
   const { removeAllWatchLater } = watchLaterSlice.actions;
   const dispatch = useDispatch();
 
@@ -15,7 +21,7 @@ const WatchLater = ({ viewTrailer }) => {
         <div data-testid="watch-later-movies" className="starred-movies">
           <h6 className="header">Watch Later List</h6>
           <div className="row">
-            {watchLaterMovies.map((movie) => (
+            {watchLaterMovies.map((movie: MovieInterface) => (
               <Movie movie={movie} key={movie.id} viewTrailer={viewTrailer} />
             ))}
           </div>

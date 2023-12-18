@@ -1,7 +1,11 @@
 import ReactPlayer from 'react-player';
 import '../styles/youtubePlayer.scss';
 
-const YoutubePlayer = ({ videoKey }) => (
+interface YoutubePlayerProps {
+  videoKey?: string;
+}
+
+const YoutubePlayer: React.FC<YoutubePlayerProps> = ({ videoKey }) => (
   <>
     {videoKey ? (
       <ReactPlayer

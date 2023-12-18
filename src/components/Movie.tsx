@@ -2,13 +2,19 @@ import { useState } from 'react';
 import clsx from 'clsx';
 import placeholder from '../assets/not-found-500X750.jpeg';
 import { useStarredStatus, useWatchLaterStatus } from '../hooks';
+import { MovieInterface } from '../interfaces';
 
-const Movie = ({ movie, viewTrailer }) => {
+interface MovieProps {
+  viewTrailer: (id: string) => void;
+  movie: MovieInterface;
+}
+
+const Movie: React.FC<MovieProps> = ({ movie, viewTrailer }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { isStarred, toggleStar } = useStarredStatus(movie);
   const { isInWatchLater, toggleWatchLater } = useWatchLaterStatus(movie);
 
-  const closeCard = (e) => {
+  const closeCard = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setIsOpen(false);
   };

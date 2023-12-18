@@ -8,10 +8,10 @@ import YoutubePlayer from './components/YoutubePlayer';
 import { useFetchTrailer } from './hooks';
 import './app.scss';
 
-const App = () => {
+const App: React.FC = () => {
   const { videoKey, fetchMovieTrailer } = useFetchTrailer();
 
-  const viewTrailer = (id) => {
+  const viewTrailer = (id: string) => {
     fetchMovieTrailer(id);
   };
 

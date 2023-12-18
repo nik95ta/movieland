@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
-import watchLaterSlice from '../data/watchLaterSlice'
+import { RootState } from '../data/store';
+import watchLaterSlice from '../data/watchLaterSlice';
+import { MovieInterface } from '../interfaces';
 
-const useWatchLaterStatus = (movie) => {
-  const { watchLaterMovies } = useSelector((state) => state.watchLater);
+const useWatchLaterStatus = (movie: MovieInterface) => {
+  const { watchLaterMovies } = useSelector((state: RootState) => state.watchLater);
   const dispatch = useDispatch();
   const { addToWatchLater, removeFromWatchLater } = watchLaterSlice.actions;
 
-  const isInWatchLater = watchLaterMovies.some((item) => item.id === movie.id);
+  const isInWatchLater = watchLaterMovies.some((item: MovieInterface) => item.id === movie.id);
   const toggleWatchLater = () => {
     const action = isInWatchLater ? removeFromWatchLater(movie) : addToWatchLater(movie);
     dispatch(action);
