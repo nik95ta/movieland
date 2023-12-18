@@ -16,6 +16,12 @@
       grid-template-columns: repeat(auto-fit, 100%);
     }
   }
+  
+  .movies-footer {
+    height: 300px;
+    width: 100%;
+    visibility: hidden;
+  }
 
   @media (max-width: 720px) {
     padding-top: 70px;
