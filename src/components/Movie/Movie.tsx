@@ -1,18 +1,27 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 import placeholder from '../../assets/not-found-500X750.jpeg';
+import { useFetchTrailer } from '../../hooks';
 import { useStarredStatus, useWatchLaterStatus } from '../../features';
+import { Modal, YoutubePlayer } from '../../components';
 import { MovieInterface } from '../../interfaces';
 
 interface MovieProps {
-  viewTrailer: (id: string) => void;
   movie: MovieInterface;
 }
 
-const Movie: React.FC<MovieProps> = ({ movie, viewTrailer }) => {
+const Movie: React.FC<MovieProps> = ({ movie }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { videoKey, isLoading, fetchMovieTrailer } = useFetchTrailer();
   const { isStarred, toggleStar } = useStarredStatus(movie);
   const { isInWatchLater, toggleWatchLater } = useWatchLaterStatus(movie);
+
+  const viewTrailer = async () => {
+    setIsModalOpen(true);
+    await fetchMovieTrailer(movie.id);
+  };
+  const closeModal = () => setIsModalOpen(false);
 
   const closeCard = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -21,6 +30,9 @@ const Movie: React.FC<MovieProps> = ({ movie, viewTrailer }) => {
 
   return (
     <div className="wrapper">
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        {isLoading ? <div>Loading...</div> : <YoutubePlayer videoKey={videoKey} />}
+      </Modal>
       <div className={clsx('card', { opened: isOpen })} onClick={() => setIsOpen(true)}>
         <div className="card-body text-center">
           <div className="overlay" />
@@ -39,7 +51,7 @@ const Movie: React.FC<MovieProps> = ({ movie, viewTrailer }) => {
               onClick={toggleWatchLater}>
               {isInWatchLater ? <i className="bi bi-check"></i> : 'Watch Later'}
             </button>
-            <button type="button" className="btn btn-dark" onClick={() => viewTrailer(movie.id)}>
+            <button type="button" className="btn btn-dark" onClick={viewTrailer}>
               View Trailer
             </button>
           </div>

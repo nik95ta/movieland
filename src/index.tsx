@@ -12,6 +12,7 @@ root.render(
     <Provider store={store}>
       <BrowserRouter>
         <App />
+        <div id="modal-root" />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

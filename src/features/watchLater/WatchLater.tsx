@@ -6,11 +6,7 @@ import { RootState } from '../../store';
 import { MovieInterface } from '../../interfaces';
 import '../starred/starred.scss';
 
-interface WatchLaterProps {
-  viewTrailer: (id: string) => void;
-}
-
-const WatchLater: React.FC<WatchLaterProps> = ({ viewTrailer }) => {
+const WatchLater: React.FC = () => {
   const { watchLaterMovies } = useSelector((state: RootState) => state.watchLater);
   const { removeAllWatchLater } = watchLaterSlice.actions;
   const dispatch = useDispatch();
@@ -22,7 +18,7 @@ const WatchLater: React.FC<WatchLaterProps> = ({ viewTrailer }) => {
           <h6 className="header">Watch Later List</h6>
           <div className="row movies-grid">
             {watchLaterMovies.map((movie: MovieInterface) => (
-              <Movie movie={movie} key={movie.id} viewTrailer={viewTrailer} />
+              <Movie movie={movie} key={movie.id} />
             ))}
           </div>
 

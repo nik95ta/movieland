@@ -152,9 +152,10 @@
   }
 
   button {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 90%;
-    height: 26px;
     margin: 8px auto;
     font-size: 0.6rem;
     text-align: center;

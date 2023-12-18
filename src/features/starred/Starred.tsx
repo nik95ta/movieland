@@ -6,11 +6,7 @@ import { RootState } from '../../store';
 import { MovieInterface } from '../../interfaces';
 import './starred.scss';
 
-interface StarredProps {
-  viewTrailer: (id: string) => void;
-}
-
-const Starred: React.FC<StarredProps> = ({ viewTrailer }) => {
+const Starred: React.FC = () => {
   const { starredMovies } = useSelector((state: RootState) => state.starred);
   const { clearAllStarred } = starredSlice.actions;
   const dispatch = useDispatch();
@@ -22,7 +18,7 @@ const Starred: React.FC<StarredProps> = ({ viewTrailer }) => {
           <h6 className="header">Starred movies</h6>
           <div className="row movies-grid">
             {starredMovies.map((movie: MovieInterface) => (
-              <Movie movie={movie} key={movie.id} viewTrailer={viewTrailer} />
+              <Movie movie={movie} key={movie.id} />
             ))}
           </div>
 
