@@ -1,11 +1,12 @@
 import { useSearchParams } from 'react-router-dom';
-import { useFetchMovies } from '../hooks';
+import { useDebounce, useFetchMovies } from '../hooks';
 import Movie from './Movie';
 import '../styles/movies.scss';
 
 const Movies = ({ viewTrailer }) => {
   const [searchParams] = useSearchParams();
-  const { movies } = useFetchMovies(searchParams.get('search'));
+  const debouncedQuery = useDebounce(searchParams.get('search'));
+  const { movies } = useFetchMovies(debouncedQuery);
 
   return (
     <div data-testid="movies">
