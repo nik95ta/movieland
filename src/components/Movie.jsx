@@ -33,7 +33,7 @@ const Movie = ({ movie, viewTrailer }) => {
               onClick={toggleWatchLater}>
               {isInWatchLater ? <i className="bi bi-check"></i> : 'Watch Later'}
             </button>
-            <button type="button" className="btn btn-dark" onClick={() => viewTrailer(movie)}>
+            <button type="button" className="btn btn-dark" onClick={() => viewTrailer(movie.id)}>
               View Trailer
             </button>
           </div>

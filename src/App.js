@@ -11,8 +11,8 @@ import './app.scss';
 const App = () => {
   const { videoKey, fetchMovieTrailer } = useFetchTrailer();
 
-  const viewTrailer = (movie) => {
-    fetchMovieTrailer(movie.id);
+  const viewTrailer = (id) => {
+    fetchMovieTrailer(id);
   };
 
   return (
