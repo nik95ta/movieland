@@ -8,7 +8,7 @@ import Header from './components/Header';
 import Movies from './components/Movies';
 import Starred from './components/Starred';
 import WatchLater from './components/WatchLater';
-import YouTubePlayer from './components/YoutubePlayer';
+import YoutubePlayer from './components/YoutubePlayer';
 import './app.scss';
 
 const App = () => {
@@ -72,14 +72,7 @@ const App = () => {
       />
 
       <div className="container">
-        {videoKey ? (
-          <YouTubePlayer videoKey={videoKey} />
-        ) : (
-          <div style={{ padding: '30px' }}>
-            <h6>no trailer available. Try another movie</h6>
-          </div>
-        )}
-
+        <YoutubePlayer videoKey={videoKey} />
         <Routes>
           <Route path="/" element={<Movies movies={movies} viewTrailer={viewTrailer} />} />
           <Route path="/starred" element={<Starred viewTrailer={viewTrailer} />} />
