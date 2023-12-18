@@ -1,79 +1,28 @@
-import { useEffect, useState } from 'react';
-import { createSearchParams, Route, Routes, useNavigate, useSearchParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
 import 'reactjs-popup/dist/index.css';
-import { fetchMovies } from './data/moviesSlice';
-import { discoverEndpoint, movieEndpoint, searchEndpoint } from './constants';
 import Header from './components/Header';
 import Movies from './components/Movies';
 import Starred from './components/Starred';
 import WatchLater from './components/WatchLater';
 import YoutubePlayer from './components/YoutubePlayer';
+import { useFetchTrailer } from './hooks';
 import './app.scss';
 
 const App = () => {
-  const { movies } = useSelector((state) => state.movies);
-  const dispatch = useDispatch();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const searchQuery = searchParams.get('search');
-  const [videoKey, setVideoKey] = useState();
-  const navigate = useNavigate();
-
-  const getSearchResults = (query) => {
-    if (query !== '') {
-      dispatch(fetchMovies(searchEndpoint(query)));
-      setSearchParams(createSearchParams({ search: query }));
-    } else {
-      dispatch(fetchMovies(discoverEndpoint()));
-      setSearchParams();
-    }
-  };
-
-  const searchMovies = (query) => {
-    navigate('/');
-    getSearchResults(query);
-  };
-
-  const getMovies = () => {
-    if (searchQuery) {
-      dispatch(fetchMovies(searchEndpoint(searchQuery)));
-    } else {
-      dispatch(fetchMovies(discoverEndpoint()));
-    }
-  };
+  const { videoKey, fetchMovieTrailer } = useFetchTrailer();
 
   const viewTrailer = (movie) => {
-    getMovie(movie.id);
+    fetchMovieTrailer(movie.id);
   };
-
-  const getMovie = async (id) => {
-    const URL = movieEndpoint(id);
-
-    setVideoKey(null);
-    const videoData = await fetch(URL).then((response) => response.json());
-
-    if (videoData.videos && videoData.videos.results.length) {
-      const trailer = videoData.videos.results.find((vid) => vid.type === 'Trailer');
-      setVideoKey(trailer ? trailer.key : videoData.videos.results[0].key);
-    }
-  };
-
-  useEffect(() => {
-    getMovies();
-  }, []);
 
   return (
     <div className="App">
-      <Header
-        searchMovies={searchMovies}
-        searchParams={searchParams}
-        setSearchParams={setSearchParams}
-      />
+      <Header />
 
       <div className="container">
         <YoutubePlayer videoKey={videoKey} />
         <Routes>
-          <Route path="/" element={<Movies movies={movies} viewTrailer={viewTrailer} />} />
+          <Route path="/" element={<Movies viewTrailer={viewTrailer} />} />
           <Route path="/starred" element={<Starred viewTrailer={viewTrailer} />} />
           <Route path="/watch-later" element={<WatchLater viewTrailer={viewTrailer} />} />
           <Route path="*" element={<h1 className="not-found">Page Not Found</h1>} />
