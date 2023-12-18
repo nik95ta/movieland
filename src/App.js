@@ -18,12 +18,7 @@ const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('search');
   const [videoKey, setVideoKey] = useState();
-  const [isOpen, setOpen] = useState(false);
   const navigate = useNavigate();
-
-  const closeModal = () => setOpen(false);
-
-  const closeCard = () => {};
 
   const getSearchResults = (query) => {
     if (query !== '') {
@@ -50,8 +45,6 @@ const App = () => {
 
   const viewTrailer = (movie) => {
     getMovie(movie.id);
-    if (!videoKey) setOpen(true);
-    setOpen(true);
   };
 
   const getMovie = async (id) => {
@@ -88,10 +81,7 @@ const App = () => {
         )}
 
         <Routes>
-          <Route
-            path="/"
-            element={<Movies movies={movies} viewTrailer={viewTrailer} closeCard={closeCard} />}
-          />
+          <Route path="/" element={<Movies movies={movies} viewTrailer={viewTrailer} />} />
           <Route path="/starred" element={<Starred viewTrailer={viewTrailer} />} />
           <Route path="/watch-later" element={<WatchLater viewTrailer={viewTrailer} />} />
           <Route path="*" element={<h1 className="not-found">Page Not Found</h1>} />
