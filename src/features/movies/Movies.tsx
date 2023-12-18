@@ -15,7 +15,7 @@ const Movies: React.FC<MoviesProps> = ({ viewTrailer }) => {
   const { movies } = useFetchMovies(debouncedQuery);
 
   return (
-    <div data-testid="movies">
+    <div data-testid="movies" className="movies-grid">
       {movies.length === 0 ? (
         <p>No movies found</p>
       ) : (

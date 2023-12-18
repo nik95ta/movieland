@@ -20,7 +20,7 @@ const Starred: React.FC<StarredProps> = ({ viewTrailer }) => {
       {starredMovies.length > 0 && (
         <div data-testid="starred-movies" className="starred-movies">
           <h6 className="header">Starred movies</h6>
-          <div className="row">
+          <div className="row movies-grid">
             {starredMovies.map((movie: MovieInterface) => (
               <Movie movie={movie} key={movie.id} viewTrailer={viewTrailer} />
             ))}

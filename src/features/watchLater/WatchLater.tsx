@@ -20,7 +20,7 @@ const WatchLater: React.FC<WatchLaterProps> = ({ viewTrailer }) => {
       {watchLaterMovies.length > 0 && (
         <div data-testid="watch-later-movies" className="starred-movies">
           <h6 className="header">Watch Later List</h6>
-          <div className="row">
+          <div className="row movies-grid">
             {watchLaterMovies.map((movie: MovieInterface) => (
               <Movie movie={movie} key={movie.id} viewTrailer={viewTrailer} />
             ))}
