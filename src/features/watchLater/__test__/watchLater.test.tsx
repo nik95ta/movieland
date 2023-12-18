@@ -15,17 +15,10 @@ beforeEach(() => {
       json: () => Promise.resolve(mockMoviesData),
     }),
   ) as jest.Mock;
-  const modalRoot = document.createElement('div');
-  modalRoot.setAttribute('id', 'modal-root');
-  document.body.appendChild(modalRoot);
 });
 
 afterEach(() => {
   jest.clearAllMocks();
-  const modalRoot = document.getElementById('modal-root');
-  if (modalRoot) {
-    document.body.removeChild(modalRoot);
-  }
 });
 
 it('Watch Later movies page', async () => {
